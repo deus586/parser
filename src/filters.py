@@ -1,4 +1,4 @@
-def filters():
+def filters() -> list:
     """
 
     Возвращает фильтры
@@ -6,12 +6,10 @@ def filters():
     # Фильтры по-умолчанию
     name = ''
     per_page = 100
-    sort = 'relevance'
+    sort = 1
     page_count = 1
 
     # Варианты сортировки
-    sort_variable = {1: 'relevance', 2: 'salary_asc',
-                     3: 'salary_desc', 4: 'publication_time'}
 
     # Спрашиваем у пользователя хочет ли он ввести фильтры
     user_input = input('Хотите ли ввести фильтры?(Y/N): ')
@@ -40,9 +38,12 @@ def filters():
                     per_page = 100
             elif choose == 3:
                 print("1. По соответствию\n2. По возрастанию оплаты\n3. По убыванию оплаты\n4. По дате")
-                sort = input('Введите вариант сортировки: ')
                 try:
-                    sort = sort_variable[int(sort)]
+                    sort = int(input('Введите вариант сортировки: '))
+                except ValueError:
+                    print('Нет такого варианта.')
+                try:
+                    sort in range(1, 5)
                 except KeyError:
                     print('Нет такого варианта.')
             elif choose == 4:
